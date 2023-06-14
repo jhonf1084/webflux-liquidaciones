@@ -1,16 +1,49 @@
 package com.webflux.liquidaciones.infraestructura.adapters;
 
 
+import com.webflux.liquidaciones.domain.model.Empleado;
 import com.webflux.liquidaciones.domain.model.gateways.EmpleadoRepository;
+import com.webflux.liquidaciones.infraestructura.adapters.entity.EmpleadoDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 
 @Repository
 @AllArgsConstructor
-public class EmpleadoDBORepositoryAdapter implements EmpleadoRepository {
+public class EmpleadoDBORepositoryAdapter implements EmpleadoRepository{
 
-    private final EmpleadoDBORepository repository;
+    private final EmpleadoDBORepository empleadoDBORepository;
 
+    @Override
+    public Mono<Empleado> guardar(Empleado empleado) {
+        EmpleadoDBO empleadoDBO = EmpleadoDBO.fromDomain(empleado);
+        return empleadoDBORepository.save(empleadoDBO).map(EmpleadoDBO::toDomain);
+    }
 
+    @Override
+    public Mono<Empleado> actualizar(Empleado empleado) {
+        return null;
+    }
+
+    @Override
+    public Mono<Empleado> eliminar(Empleado empleado) {
+        return null;
+    }
+
+    @Override
+    public Mono<Empleado> consultarPorDocumento(Integer documento) {
+        return null;
+    }
+
+    @Override
+    public Mono<Empleado> consultarPorIdOrNombresApellidos(Integer id, String nombresApellidos) {
+        return null;
+    }
+
+    @Override
+    public Flux<Empleado> consultarTodos() {
+        return null;
+    }
 }

@@ -8,6 +8,5 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface EmpleadoDBORepository extends ReactiveCrudRepository<EmpleadoDBO, Integer> {
 
-    public Mono<EmpleadoDBO> findByIdDocumento(Integer idDocumento);
 
 }

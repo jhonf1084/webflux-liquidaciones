@@ -1,4 +1,4 @@
-package com.webflux.liquidaciones.domain.model.dto;
+package com.webflux.liquidaciones.infraestructura.entrypoint.empleado.dto;
 
 import com.webflux.liquidaciones.domain.model.Empleado;
 
