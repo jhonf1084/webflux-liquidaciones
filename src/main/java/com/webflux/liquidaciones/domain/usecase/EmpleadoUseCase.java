@@ -15,21 +15,21 @@ public class EmpleadoUseCase{
         return empleadoRepository.guardar(empleado);
     }
 
-    public Mono<Empleado> actualizar(Empleado empleado) {
-        return empleadoRepository.actualizar(empleado);
+    public Mono<Empleado> actualizarByDocumento(Empleado empleado) {
+        return empleadoRepository.actualizarByDocumento(empleado);
     }
 
-    public Mono<Empleado> eliminar(Empleado empleado) {
-        return empleadoRepository.eliminar(empleado);
+    public Mono<Empleado> eliminar(Integer id) {
+        return empleadoRepository.eliminar(id);
     }
 
     public Mono<Empleado> consultarPorDocumento(Integer documento) {
         return empleadoRepository.consultarPorDocumento(documento);
     }
 
-    public Mono<Empleado> consultarPorIdOrNombresApellidos(Integer id, String nombresApellidos) {
-        return empleadoRepository.consultarPorIdOrNombresApellidos(id, nombresApellidos);
-    }
+//    public Mono<Empleado> consultarPorIdOrNombresApellidos(Integer id, String nombresApellidos) {
+//        return empleadoRepository.consultarPorIdOrNombresApellidos(id, nombresApellidos);
+//    }
 
     public Flux<Empleado> consultarTodos() {
         return empleadoRepository.consultarTodos();

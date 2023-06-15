@@ -9,10 +9,11 @@ import reactor.core.publisher.Mono;
 public interface EmpleadoRepository {
 
     Mono<Empleado> guardar(Empleado empleado);
-    Mono<Empleado> actualizar(Empleado empleado);
-    Mono<Empleado> eliminar(Empleado empleado);
+    Mono<Empleado> actualizarByDocumento(Empleado empleado);
+    Mono<Empleado> eliminar(Integer id);
     Mono<Empleado> consultarPorDocumento(Integer documento);
-    Mono<Empleado> consultarPorIdOrNombresApellidos(Integer id, String nombresApellidos);
+
+    //Mono<Empleado> consultarPorIdOrNombresApellidos(Integer id, String nombresApellidos);
     Flux<Empleado> consultarTodos();
 
 }

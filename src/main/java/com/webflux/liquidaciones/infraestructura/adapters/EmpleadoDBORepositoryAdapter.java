@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 @AllArgsConstructor
-public class EmpleadoDBORepositoryAdapter implements EmpleadoRepository{
+public class EmpleadoDBORepositoryAdapter implements EmpleadoRepository {
 
     private final EmpleadoDBORepository empleadoDBORepository;
 
@@ -23,27 +23,32 @@ public class EmpleadoDBORepositoryAdapter implements EmpleadoRepository{
     }
 
     @Override
-    public Mono<Empleado> actualizar(Empleado empleado) {
-        return null;
+    public Mono<Empleado> actualizarByDocumento(Empleado empleado) {
+        EmpleadoDBO empleadoDBO = EmpleadoDBO.fromDomain(empleado);
+        return empleadoDBORepository.save(empleadoDBO).map(EmpleadoDBO::toDomain);
     }
 
     @Override
-    public Mono<Empleado> eliminar(Empleado empleado) {
-        return null;
+    public Mono<Empleado> eliminar(Integer id) {
+        return empleadoDBORepository.findById(id)
+                .flatMap(empleadoDBO -> empleadoDBORepository
+                        .delete(empleadoDBO)
+                        .thenReturn(EmpleadoDBO.toDomain(empleadoDBO)));
     }
 
     @Override
     public Mono<Empleado> consultarPorDocumento(Integer documento) {
-        return null;
+
+        return empleadoDBORepository.findById(documento).map(EmpleadoDBO::toDomain);
     }
 
-    @Override
-    public Mono<Empleado> consultarPorIdOrNombresApellidos(Integer id, String nombresApellidos) {
-        return null;
-    }
+//    @Override
+//    public Mono<Empleado> consultarPorIdOrNombresApellidos(Integer id, String nombresApellidos) {
+//        return null;
+//    }
 
     @Override
     public Flux<Empleado> consultarTodos() {
-        return null;
+        return empleadoDBORepository.findAll().map(EmpleadoDBO::toDomain);
     }
 }
