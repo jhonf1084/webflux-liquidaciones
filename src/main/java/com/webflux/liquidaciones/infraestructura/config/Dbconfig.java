@@ -23,11 +23,8 @@ public class Dbconfig extends AbstractR2dbcConfiguration {
                     .port(5432)
                     .username("postgres")
                     .password("Conejo01")
-                    .database("liquidaciones")
+                    .database("liquidacion")
                     .build());
     }
-
-
-
 
 }

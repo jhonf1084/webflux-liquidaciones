@@ -10,8 +10,8 @@ public interface EmpleadoRepository {
 
     Mono<Empleado> guardar(Empleado empleado);
     Mono<Empleado> actualizarByDocumento(Empleado empleado);
-    Mono<Empleado> eliminar(Integer id);
-    Mono<Empleado> consultarPorDocumento(Integer documento);
+    Mono<Empleado> eliminar(Integer id_documento);
+    Mono<Empleado> consultarByDocumento(Integer id_documento);
 
     //Mono<Empleado> consultarPorIdOrNombresApellidos(Integer id, String nombresApellidos);
     Flux<Empleado> consultarTodos();

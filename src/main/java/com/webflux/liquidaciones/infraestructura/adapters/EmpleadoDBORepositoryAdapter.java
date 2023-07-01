@@ -16,10 +16,10 @@ public class EmpleadoDBORepositoryAdapter implements EmpleadoRepository {
 
     private final EmpleadoDBORepository empleadoDBORepository;
 
+
     @Override
     public Mono<Empleado> guardar(Empleado empleado) {
-        EmpleadoDBO empleadoDBO = EmpleadoDBO.fromDomain(empleado);
-        return empleadoDBORepository.save(empleadoDBO).map(EmpleadoDBO::toDomain);
+        return empleadoDBORepository.save(EmpleadoDBO.fromDomain(empleado)).map(EmpleadoDBO::toDomain);
     }
 
     @Override
@@ -31,13 +31,13 @@ public class EmpleadoDBORepositoryAdapter implements EmpleadoRepository {
     @Override
     public Mono<Empleado> eliminar(Integer id) {
         return empleadoDBORepository.findById(id)
-                .flatMap(empleadoDBO -> empleadoDBORepository
-                        .delete(empleadoDBO)
-                        .thenReturn(EmpleadoDBO.toDomain(empleadoDBO)));
+                .flatMap(E -> empleadoDBORepository
+                        .delete(E)
+                        .then(Mono.just(E.toDomain())));
     }
 
     @Override
-    public Mono<Empleado> consultarPorDocumento(Integer documento) {
+    public Mono<Empleado> consultarByDocumento(Integer documento) {
 
         return empleadoDBORepository.findById(documento).map(EmpleadoDBO::toDomain);
     }
@@ -49,6 +49,7 @@ public class EmpleadoDBORepositoryAdapter implements EmpleadoRepository {
 
     @Override
     public Flux<Empleado> consultarTodos() {
+
         return empleadoDBORepository.findAll().map(EmpleadoDBO::toDomain);
     }
 }
